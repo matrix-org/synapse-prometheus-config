@@ -140,25 +140,16 @@ new PromConsole.Graph({
 </script>
 
 <h3>Pending</h3>
-<div id="synapse_federation_pending"></div>
+<div id="synapse_federation_transaction_queue_pending"></div>
 <script>
 new PromConsole.Graph({
-  node: document.querySelector("#synapse_federation_pending"),
-  expr: "synapse_federation_transaction_queue_pendingEdus:total",
-  name: "EDUs",
+  node: document.querySelector("#synapse_federation_transaction_queue_pending"),
+  expr: "synapse_federation_transaction_queue_pending",
+  name: "[[type]]",
   yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
   yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
   yUnits: "",
-  yTitle: "EDUs"
-})
-new PromConsole.Graph({
-  node: document.querySelector("#synapse_federation_pending"),
-  expr: "synapse_federation_transaction_queue_pendingPdus:total",
-  name: "PDUs",
-  yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
-  yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
-  yUnits: "",
-  yTitle: "PDUs"
+  yTitle: "Units"
 })
 </script>
 
@@ -175,6 +166,20 @@ new PromConsole.Graph({
   yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
   yUnits: "",
   yTitle: "Listeners"
+})
+</script>
+
+<h3>Notified Events</h3>
+<div id="synapse_notifier_notified_events"></div>
+<script>
+new PromConsole.Graph({
+  node: document.querySelector("#synapse_notifier_notified_events"),
+  expr: "rate(synapse_notifier_notified_events[2m])",
+  name: "events",
+  yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yUnits: "/s",
+  yTitle: "Events"
 })
 </script>
 
