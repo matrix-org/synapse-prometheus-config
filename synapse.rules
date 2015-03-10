@@ -1,0 +1,22 @@
+synapse_federation_transaction_queue_pendingEdus:total = sum(synapse_federation_transaction_queue_pendingEdus or absent(synapse_federation_transaction_queue_pendingEdus)*0)
+synapse_federation_transaction_queue_pendingPdus:total = sum(synapse_federation_transaction_queue_pendingPdus or absent(synapse_federation_transaction_queue_pendingPdus)*0)
+
+synapse_http_server_requests:method{servlet=""} = sum(synapse_http_server_requests) by (method)
+synapse_http_server_requests:servlet{method=""} = sum(synapse_http_server_requests) by (servlet)
+
+synapse_http_server_requests:total{servlet=""} = sum(synapse_http_server_requests:by_method) by (servlet)
+
+synapse_storage_cache:hit_ratio_5m = rate(synapse_storage_cache:hits[5m]) / rate(synapse_storage_cache:total[5m])
+
+/* temporary rules to make some vectors that are easier to graph, since
+ * currently prometheus's graph generation can't put more than one expression
+ * on a single plot
+ */
+
+synapse_federation_client_sent{type="EDU"} = sum(synapse_federation_client_sent_edus)
+synapse_federation_client_sent{type="PDU"} = sum(synapse_federation_client_sent_pdu_destinations:count)
+synapse_federation_client_sent{type="Query"} = sum(synapse_federation_client_sent_queries) by (type)
+
+synapse_federation_server_received{type="EDU"} = sum(synapse_federation_server_received_edus)
+synapse_federation_server_received{type="PDU"} = sum(synapse_federation_server_received_pdus)
+synapse_federation_server_received{type="Query"} = sum(synapse_federation_server_received_queries) by (type)

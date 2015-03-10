@@ -1,0 +1,183 @@
+{{ template "head" . }}
+
+{{ template "prom_content_head" . }}
+<h1>System Resources</h1>
+
+<h3>CPU</h3>
+<div id="system_resource_utime"></div>
+<script>
+new PromConsole.Graph({
+  node: document.querySelector("#system_resource_utime"),
+  expr: "rate(process_resource_utime[2m]) / 1000",
+  name: "utime",
+  renderer: "area",
+  height: 150,
+  yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yUnits: "s/s",
+  yTitle: "Usage"
+})
+</script>
+
+<h3>Memory</h3>
+<div id="system_resource_maxrss"></div>
+<script>
+new PromConsole.Graph({
+  node: document.querySelector("#system_resource_maxrss"),
+  expr: "process_resource_maxrss",
+  name: "maxrss",
+  renderer: "line",
+  height: 150,
+  yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yUnits: "bytes",
+  yTitle: "Usage"
+})
+</script>
+
+<h1>Storage</h1>
+
+<h3>Queries</h3>
+<div id="synapse_storage_query_time"></div>
+<script>
+new PromConsole.Graph({
+  node: document.querySelector("#synapse_storage_query_time"),
+  expr: "rate(synapse_storage_query_time:count[2m])",
+  name: "[[verb]]",
+  yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yUnits: "/s",
+  yTitle: "Queries"
+})
+</script>
+
+<h3>Transactions</h3>
+<div id="synapse_storage_transaction_time"></div>
+<script>
+new PromConsole.Graph({
+  node: document.querySelector("#synapse_storage_transaction_time"),
+  expr: "rate(synapse_storage_transaction_time:count[2m])",
+  name: "[[desc]]",
+  yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yUnits: "/s",
+  yTitle: "Transactions"
+})
+</script>
+
+<h3>Transaction execution time</h3>
+<div id="synapse_storage_transactions_time_msec"></div>
+<script>
+new PromConsole.Graph({
+  node: document.querySelector("#synapse_storage_transactions_time_msec"),
+  expr: "rate(synapse_storage_transaction_time:total[2m]) / 1000",
+  name: "[[desc]]",
+  yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yUnits: "s/s",
+  yTitle: "Usage"
+})
+</script>
+
+<h3>Cache hit ratio</h3>
+<div id="synapse_storage_cache_ratio"></div>
+<script>
+new PromConsole.Graph({
+  node: document.querySelector("#synapse_storage_cache_ratio"),
+  expr: "synapse_storage_cache:hit_ratio_5m * 100",
+  name: "[[name]]",
+  yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yUnits: "",
+  yTitle: "Percentage"
+})
+</script>
+
+<h1>Requests</h1>
+
+<h3>Requests by Servlet</h3>
+<div id="synapse_http_server_requests_servlet"></div>
+<script>
+new PromConsole.Graph({
+  node: document.querySelector("#synapse_http_server_requests_servlet"),
+  expr: "rate(synapse_http_server_requests:servlet[2m])",
+  name: "[[servlet]]",
+  yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yUnits: "/s",
+  yTitle: "Requests"
+})
+</script>
+
+<h1>Federation</h1>
+
+<h3>Sent Messages</h3>
+<div id="synapse_federation_client_sent"></div>
+<script>
+new PromConsole.Graph({
+  node: document.querySelector("#synapse_federation_client_sent"),
+  expr: "rate(synapse_federation_client_sent[2m])",
+  name: "[[type]]",
+  yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yUnits: "/s",
+  yTitle: "Requests"
+})
+</script>
+
+<h3>Received Messages</h3>
+<div id="synapse_federation_server_received"></div>
+<script>
+new PromConsole.Graph({
+  node: document.querySelector("#synapse_federation_server_received"),
+  expr: "rate(synapse_federation_server_received[2m])",
+  name: "[[type]]",
+  yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yUnits: "/s",
+  yTitle: "Requests"
+})
+</script>
+
+<h3>Pending</h3>
+<div id="synapse_federation_pending"></div>
+<script>
+new PromConsole.Graph({
+  node: document.querySelector("#synapse_federation_pending"),
+  expr: "synapse_federation_transaction_queue_pendingEdus:total",
+  name: "EDUs",
+  yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yUnits: "",
+  yTitle: "EDUs"
+})
+new PromConsole.Graph({
+  node: document.querySelector("#synapse_federation_pending"),
+  expr: "synapse_federation_transaction_queue_pendingPdus:total",
+  name: "PDUs",
+  yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yUnits: "",
+  yTitle: "PDUs"
+})
+</script>
+
+<h1>Clients</h1>
+
+<h3>Notifiers</h3>
+<div id="synapse_notifier_listeners"></div>
+<script>
+new PromConsole.Graph({
+  node: document.querySelector("#synapse_notifier_listeners"),
+  expr: "synapse_notifier_listeners",
+  name: "listeners",
+  yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yUnits: "",
+  yTitle: "Listeners"
+})
+</script>
+
+{{ template "prom_content_tail" . }}
+
+{{ template "tail" }}
