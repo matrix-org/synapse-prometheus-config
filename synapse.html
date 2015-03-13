@@ -93,6 +93,20 @@ new PromConsole.Graph({
 })
 </script>
 
+<h3>Cache size</h3>
+<div id="synapse_storage_cache_size"></div>
+<script>
+new PromConsole.Graph({
+  node: document.querySelector("#synapse_storage_cache_size"),
+  expr: "synapse_storage_cache:size",
+  name: "[[name]]",
+  yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yUnits: "",
+  yTitle: "Items"
+})
+</script>
+
 <h1>Requests</h1>
 
 <h3>Requests by Servlet</h3>
