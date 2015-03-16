@@ -19,11 +19,11 @@ synapse_storage_cache:hit_ratio_5m = rate(synapse_storage_cache:hits[5m]) / rate
 
 synapse_federation_client_sent{type="EDU"} = synapse_federation_client_sent_edus + 0
 synapse_federation_client_sent{type="PDU"} = synapse_federation_client_sent_pdu_destinations:count + 0
-synapse_federation_client_sent{type="Query"} = sum(synapse_federation_client_sent_queries) by (type)
+synapse_federation_client_sent{type="Query"} = sum(synapse_federation_client_sent_queries) by (job)
 
 synapse_federation_server_received{type="EDU"} = synapse_federation_server_received_edus + 0
 synapse_federation_server_received{type="PDU"} = synapse_federation_server_received_pdus + 0
-synapse_federation_server_received{type="Query"} = sum(synapse_federation_server_received_queries) by (type)
+synapse_federation_server_received{type="Query"} = sum(synapse_federation_server_received_queries) by (job)
 
 synapse_federation_transaction_queue_pending{type="EDU"} = synapse_federation_transaction_queue_pending_edus + 0
 synapse_federation_transaction_queue_pending{type="PDU"} = synapse_federation_transaction_queue_pending_pdus + 0
