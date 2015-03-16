@@ -79,6 +79,20 @@ new PromConsole.Graph({
 })
 </script>
 
+<h3>Database scheduling latency</h3>
+<div id="synapse_storage_schedule_time"></div>
+<script>
+new PromConsole.Graph({
+  node: document.querySelector("#synapse_storage_schedule_time"),
+  expr: "rate(synapse_storage_schedule_time:total[2m]) / 1000",
+  name: "Total latency",
+  yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yUnits: "s/s",
+  yTitle: "Usage"
+})
+</script>
+
 <h3>Cache hit ratio</h3>
 <div id="synapse_storage_cache_ratio"></div>
 <script>
