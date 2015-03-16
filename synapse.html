@@ -122,6 +122,19 @@ new PromConsole.Graph({
   yTitle: "Requests"
 })
 </script>
+<h4>&nbsp;(without <tt>EventStreamRestServlet</tt>)</h4>
+<div id="synapse_http_server_requests_servlet_minus_events"></div>
+<script>
+new PromConsole.Graph({
+  node: document.querySelector("#synapse_http_server_requests_servlet_minus_events"),
+  expr: "rate(synapse_http_server_requests:servlet{servlet!=\"EventStreamRestServlet\"}[2m])",
+  name: "[[servlet]]",
+  yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yUnits: "/s",
+  yTitle: "Requests"
+})
+</script>
 
 <h1>Federation</h1>
 
