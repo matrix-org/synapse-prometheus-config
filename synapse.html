@@ -150,6 +150,20 @@ new PromConsole.Graph({
 })
 </script>
 
+<h3>Average response times</h3>
+<div id="synapse_http_server_response_time_avg"></div>
+<script>
+new PromConsole.Graph({
+  node: document.querySelector("#synapse_http_server_response_time_avg"),
+  expr: "rate(synapse_http_server_response_time:total[2m]) / rate(synapse_http_server_response_time:count[2m]) / 1000",
+  name: "[[servlet]]",
+  yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yUnits: "s/request",
+  yTitle: "Response time"
+})
+</script>
+
 <h1>Federation</h1>
 
 <h3>Sent Messages</h3>
