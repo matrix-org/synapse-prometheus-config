@@ -12,8 +12,8 @@ new PromConsole.Graph({
   name: "utime",
   renderer: "area",
   height: 150,
-  yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
-  yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yAxisFormatter: PromConsole.NumberFormatter.humanize,
+  yHoverFormatter: PromConsole.NumberFormatter.humanize,
   yUnits: "s/s",
   yTitle: "Usage"
 })
@@ -46,7 +46,7 @@ new PromConsole.Graph({
   name: "[[verb]]",
   yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
   yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
-  yUnits: "/s",
+  yUnits: "queries/s",
   yTitle: "Queries"
 })
 </script>
@@ -60,7 +60,7 @@ new PromConsole.Graph({
   name: "[[desc]]",
   yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
   yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
-  yUnits: "/s",
+  yUnits: "txn/s",
   yTitle: "Transactions"
 })
 </script>
@@ -72,8 +72,8 @@ new PromConsole.Graph({
   node: document.querySelector("#synapse_storage_transactions_time_msec"),
   expr: "rate(synapse_storage_transaction_time:total[2m]) / 1000",
   name: "[[desc]]",
-  yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
-  yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yAxisFormatter: PromConsole.NumberFormatter.humanize,
+  yHoverFormatter: PromConsole.NumberFormatter.humanize,
   yUnits: "s/s",
   yTitle: "Usage"
 })
@@ -86,8 +86,8 @@ new PromConsole.Graph({
   node: document.querySelector("#synapse_storage_schedule_time"),
   expr: "rate(synapse_storage_schedule_time:total[2m]) / 1000",
   name: "Total latency",
-  yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
-  yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yAxisFormatter: PromConsole.NumberFormatter.humanize,
+  yHoverFormatter: PromConsole.NumberFormatter.humanize,
   yUnits: "s/s",
   yTitle: "Usage"
 })
@@ -102,7 +102,7 @@ new PromConsole.Graph({
   name: "[[name]]",
   yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
   yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
-  yUnits: "",
+  yUnits: "%",
   yTitle: "Percentage"
 })
 </script>
@@ -130,9 +130,9 @@ new PromConsole.Graph({
   node: document.querySelector("#synapse_http_server_requests_servlet"),
   expr: "rate(synapse_http_server_requests:servlet[2m])",
   name: "[[servlet]]",
-  yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
-  yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
-  yUnits: "/s",
+  yAxisFormatter: PromConsole.NumberFormatter.humanize,
+  yHoverFormatter: PromConsole.NumberFormatter.humanize,
+  yUnits: "req/s",
   yTitle: "Requests"
 })
 </script>
@@ -143,9 +143,9 @@ new PromConsole.Graph({
   node: document.querySelector("#synapse_http_server_requests_servlet_minus_events"),
   expr: "rate(synapse_http_server_requests:servlet{servlet!=\"EventStreamRestServlet\"}[2m])",
   name: "[[servlet]]",
-  yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
-  yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
-  yUnits: "/s",
+  yAxisFormatter: PromConsole.NumberFormatter.humanize,
+  yHoverFormatter: PromConsole.NumberFormatter.humanize,
+  yUnits: "req/s",
   yTitle: "Requests"
 })
 </script>
@@ -157,9 +157,9 @@ new PromConsole.Graph({
   node: document.querySelector("#synapse_http_server_response_time_avg"),
   expr: "rate(synapse_http_server_response_time:total[2m]) / rate(synapse_http_server_response_time:count[2m]) / 1000",
   name: "[[servlet]]",
-  yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
-  yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
-  yUnits: "s/request",
+  yAxisFormatter: PromConsole.NumberFormatter.humanize,
+  yHoverFormatter: PromConsole.NumberFormatter.humanize,
+  yUnits: "s/req",
   yTitle: "Response time"
 })
 </script>
@@ -173,9 +173,9 @@ new PromConsole.Graph({
   node: document.querySelector("#synapse_federation_client_sent"),
   expr: "rate(synapse_federation_client_sent[2m])",
   name: "[[type]]",
-  yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
-  yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
-  yUnits: "/s",
+  yAxisFormatter: PromConsole.NumberFormatter.humanize,
+  yHoverFormatter: PromConsole.NumberFormatter.humanize,
+  yUnits: "req/s",
   yTitle: "Requests"
 })
 </script>
@@ -187,9 +187,9 @@ new PromConsole.Graph({
   node: document.querySelector("#synapse_federation_server_received"),
   expr: "rate(synapse_federation_server_received[2m])",
   name: "[[type]]",
-  yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
-  yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
-  yUnits: "/s",
+  yAxisFormatter: PromConsole.NumberFormatter.humanize,
+  yHoverFormatter: PromConsole.NumberFormatter.humanize,
+  yUnits: "req/s",
   yTitle: "Requests"
 })
 </script>
@@ -231,10 +231,10 @@ new PromConsole.Graph({
   node: document.querySelector("#synapse_notifier_notified_events"),
   expr: "rate(synapse_notifier_notified_events[2m])",
   name: "events",
-  yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
-  yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
-  yUnits: "/s",
-  yTitle: "Events"
+  yAxisFormatter: PromConsole.NumberFormatter.humanize,
+  yHoverFormatter: PromConsole.NumberFormatter.humanize,
+  yUnits: "events/s",
+  yTitle: "Event rate"
 })
 </script>
 
