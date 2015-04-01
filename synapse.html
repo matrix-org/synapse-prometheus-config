@@ -4,10 +4,10 @@
 <h1>System Resources</h1>
 
 <h3>CPU</h3>
-<div id="system_resource_utime"></div>
+<div id="process_resource_utime"></div>
 <script>
 new PromConsole.Graph({
-  node: document.querySelector("#system_resource_utime"),
+  node: document.querySelector("#process_resource_utime"),
   expr: "rate(process_resource_utime[2m]) / 1000",
   name: "utime",
   renderer: "area",
@@ -20,10 +20,10 @@ new PromConsole.Graph({
 </script>
 
 <h3>Memory</h3>
-<div id="system_resource_maxrss"></div>
+<div id="process_resource_maxrss"></div>
 <script>
 new PromConsole.Graph({
-  node: document.querySelector("#system_resource_maxrss"),
+  node: document.querySelector("#process_resource_maxrss"),
   expr: "process_resource_maxrss",
   name: "maxrss",
   renderer: "line",
@@ -32,6 +32,22 @@ new PromConsole.Graph({
   yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
   yUnits: "bytes",
   yTitle: "Usage"
+})
+</script>
+
+<h3>File descriptors</h3>
+<div id="process_fds"></div>
+<script>
+new PromConsole.Graph({
+  node: document.querySelector("#process_fds"),
+  expr: "process_fds:total",
+  name: "FDs",
+  renderer: "line",
+  height: 150,
+  yAxisFormatter: PromConsole.NumberFormatter.humanize,
+  yHoverFormatter: PromConsole.NumberFormatter.humanize,
+  yUnits: "",
+  yTitle: "Descriptors"
 })
 </script>
 

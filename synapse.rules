@@ -10,6 +10,8 @@ synapse_http_server_requests:total{servlet=""} = sum(synapse_http_server_request
 
 synapse_storage_cache:hit_ratio_5m = rate(synapse_storage_cache:hits[5m]) / rate(synapse_storage_cache:total[5m])
 
+process_fds:total = sum(process_fds) by (job)
+
 /* temporary rules to make some vectors that are easier to graph, since
  * currently prometheus's graph generation can't put more than one expression
  * on a single plot.
