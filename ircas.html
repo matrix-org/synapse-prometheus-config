@@ -1,0 +1,54 @@
+{{ template "head" . }}
+
+{{ template "prom_content_head" . }}
+<h1>System Resources</h1>
+
+<h3>Memory</h3>
+<div id="memory_gauge"></div>
+<script>
+new PromConsole.Graph({
+  node: document.querySelector("#memory_gauge"),
+  expr: "memory_gauge",
+  name: "[[type]]",
+  renderer: "line",
+  height: 150,
+  yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yUnits: "bytes",
+  yTitle: "Usage"
+})
+</script>
+
+<h1>Requests</h1>
+
+<h3>Counts</h3>
+<div id="requests_timer_count"></div>
+<script>
+new PromConsole.Graph({
+  node: document.querySelector("#requests_timer_count"),
+  expr: "rate(requests_timer_count[2m])",
+  name: "[[outcome]]",
+  yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yUnits: "requests/s",
+  yTitle: "Requests"
+})
+</script>
+
+<h3>Timings</h3>
+<div id="requests_timer"></div>
+<script>
+new PromConsole.Graph({
+  node: document.querySelector("#requests_timer"),
+  expr: "requests_timer{quantile=\"0.9\"}",
+  name: "[[outcome]]",
+  yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yUnits: "ms",
+  yTitle: "Duration"
+})
+</script>
+
+{{ template "prom_content_tail" . }}
+
+{{ template "tail" }}
