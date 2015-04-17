@@ -1,5 +1,6 @@
 Please see wiki/MatrixOps for how this is setup. The abridged version is:
 
+                9878                     9877                     9876                     PORT
 IRC-AS -- UDP --> Statsd Server -- UDP --> Statsd-Prometheus Bridge <-- HTTP -- Prometheus
   1                    2                            3                              4
 
@@ -11,3 +12,10 @@ IRC-AS -- UDP --> Statsd Server -- UDP --> Statsd-Prometheus Bridge <-- HTTP -- 
 4 - Prometheus hits the bridge to get latest stats.
 
 If you're setting this up, this directory contains the correct config options.
+The bridge should be run as:
+
+  ./statsd_bridge -statsd.listen-address=":9877" -statsd.mapping-config="statsd-prometheus-mappings.cfg" -web.listen-address=":9876" -web.telemetry-path="/metrics"
+
+Statsd should be run as:
+
+  node stats.js statsd-config.js

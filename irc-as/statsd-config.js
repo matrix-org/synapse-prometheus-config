@@ -105,7 +105,7 @@ Optional Variables:
                          changes. The default is true. Set this to false to disable.
 */
 {
-  repeater: [{host:"127.0.0.1", port:2003}]
+  repeater: [{host:"127.0.0.1", port:9877}]
 , port: 9878
 , debug: true
 , backends: [ "./backends/repeater" ]
