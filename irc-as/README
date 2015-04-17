@@ -1,0 +1,13 @@
+Please see wiki/MatrixOps for how this is setup. The abridged version is:
+
+IRC-AS -- UDP --> Statsd Server -- UDP --> Statsd-Prometheus Bridge <-- HTTP -- Prometheus
+  1                    2                            3                              4
+
+1 - The AS sends stats as UDP
+2 - The Statsd server acts as a 'repeater' and forwards these stats to the
+    bridge (this is statsd-config.js)
+3 - The bridge maps statsd metrics to prometheus metrics and exposes a listener
+    (this is statsd-prometheus-mappings.cfg)
+4 - Prometheus hits the bridge to get latest stats.
+
+If you're setting this up, this directory contains the correct config options.
