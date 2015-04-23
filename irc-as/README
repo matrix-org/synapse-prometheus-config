@@ -1,4 +1,4 @@
-Please see wiki/MatrixOps for how this is setup. The abridged version is:
+A typical deployment config is:
 
                 9878                     9877                     9876                     PORT
 IRC-AS -- UDP --> Statsd Server -- UDP --> Statsd-Prometheus Bridge <-- HTTP -- Prometheus
@@ -19,3 +19,5 @@ The bridge should be run as:
 Statsd should be run as:
 
   node stats.js statsd-config.js
+
+More details on the matrix.org IRC AS deployment are on the internal wiki.
