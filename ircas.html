@@ -9,13 +9,29 @@
 new PromConsole.Graph({
   node: document.querySelector("#memory_gauge"),
   expr: "ircas_memory_gauge",
-  name: "[[pid]]-[[type]]",
+  name: "[[ircinst]]-[[type]]",
   renderer: "line",
   height: 150,
   yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
   yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
   yUnits: "bytes",
   yTitle: "Usage"
+})
+</script>
+
+<h3>IRC Client Connections</h3>
+<div id="irc_cli_conn"></div>
+<script>
+new PromConsole.Graph({
+  node: document.querySelector("#irc_cli_conn"),
+  expr: "ircas_conn_clients",
+  name: "[[ircinst]]-[[domain]]",
+  renderer: "line",
+  height: 150,
+  yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yUnits: "connection",
+  yTitle: "TCP Connections"
 })
 </script>
 

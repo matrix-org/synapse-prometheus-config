@@ -1,5 +1,3 @@
-// vim:ft=prometheus_rules
-
 synapse_federation_transaction_queue_pendingEdus:total = sum(synapse_federation_transaction_queue_pendingEdus or absent(synapse_federation_transaction_queue_pendingEdus)*0)
 synapse_federation_transaction_queue_pendingPdus:total = sum(synapse_federation_transaction_queue_pendingPdus or absent(synapse_federation_transaction_queue_pendingPdus)*0)
 
@@ -11,13 +9,6 @@ synapse_http_server_requests:total{servlet=""} = sum(synapse_http_server_request
 synapse_storage_cache:hit_ratio_5m = rate(synapse_storage_cache:hits[5m]) / rate(synapse_storage_cache:total[5m])
 
 process_fds:total = sum(process_fds) by (job)
-
-/* temporary rules to make some vectors that are easier to graph, since
- * currently prometheus's graph generation can't put more than one expression
- * on a single plot.
- * Additionally, the trailing "+ 0" works around a prometheus bug caused by
- * plain  var = var  rules.
- */
 
 synapse_federation_client_sent{type="EDU"} = synapse_federation_client_sent_edus + 0
 synapse_federation_client_sent{type="PDU"} = synapse_federation_client_sent_pdu_destinations:count + 0
