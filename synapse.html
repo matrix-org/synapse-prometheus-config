@@ -10,6 +10,8 @@ new PromConsole.Graph({
   node: document.querySelector("#process_resource_utime"),
   expr: "rate(process_resource_utime[2m]) / 1000",
   name: "utime",
+  max: 1,
+  min: 0,
   renderer: "area",
   height: 150,
   yAxisFormatter: PromConsole.NumberFormatter.humanize,
@@ -26,6 +28,7 @@ new PromConsole.Graph({
   node: document.querySelector("#process_resource_maxrss"),
   expr: "process_resource_maxrss",
   name: "maxrss",
+  min: 0,
   renderer: "line",
   height: 150,
   yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
@@ -42,12 +45,66 @@ new PromConsole.Graph({
   node: document.querySelector("#process_fds"),
   expr: "process_fds:total",
   name: "FDs",
+  min: 0,
   renderer: "line",
   height: 150,
   yAxisFormatter: PromConsole.NumberFormatter.humanize,
   yHoverFormatter: PromConsole.NumberFormatter.humanize,
   yUnits: "",
   yTitle: "Descriptors"
+})
+</script>
+
+<h1>Reactor</h1>
+
+<h3>Total reactor time</h3>
+<div id="reactor_total_time"></div>
+<script>
+new PromConsole.Graph({
+  node: document.querySelector("#reactor_total_time"),
+  expr: "rate(reactor_tick_time:total[2m]) / 1000",
+  name: "time",
+  max: 1,
+  min: 0,
+  renderer: "area",
+  height: 150,
+  yAxisFormatter: PromConsole.NumberFormatter.humanize,
+  yHoverFormatter: PromConsole.NumberFormatter.humanize,
+  yUnits: "s/s",
+  yTitle: "Usage"
+})
+</script>
+
+<h3>Average reactor tick time</h3>
+<div id="reactor_average_time"></div>
+<script>
+new PromConsole.Graph({
+  node: document.querySelector("#reactor_average_time"),
+  expr: "rate(reactor_tick_time:total[2m]) / rate(reactor_tick_time:count[2m]) / 1000",
+  name: "time",
+  min: 0,
+  renderer: "line",
+  height: 150,
+  yAxisFormatter: PromConsole.NumberFormatter.humanize,
+  yHoverFormatter: PromConsole.NumberFormatter.humanize,
+  yUnits: "s",
+  yTitle: "Time"
+})
+</script>
+
+<h3>Pending calls per tick</h3>
+<div id="reactor_pending_calls"></div>
+<script>
+new PromConsole.Graph({
+  node: document.querySelector("#reactor_pending_calls"),
+  expr: "rate(reactor_pending_calls:total[30s])/rate(reactor_pending_calls:count[30s])",
+  name: "calls",
+  min: 0,
+  renderer: "line",
+  height: 150,
+  yAxisFormatter: PromConsole.NumberFormatter.humanize,
+  yHoverFormatter: PromConsole.NumberFormatter.humanize,
+  yTitle: "Pending Cals"
 })
 </script>
 
@@ -74,6 +131,7 @@ new PromConsole.Graph({
   node: document.querySelector("#synapse_storage_transaction_time"),
   expr: "rate(synapse_storage_transaction_time:count[2m])",
   name: "[[desc]]",
+  min: 0,
   yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
   yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
   yUnits: "txn/s",
@@ -88,6 +146,7 @@ new PromConsole.Graph({
   node: document.querySelector("#synapse_storage_transactions_time_msec"),
   expr: "rate(synapse_storage_transaction_time:total[2m]) / 1000",
   name: "[[desc]]",
+  min: 0,
   yAxisFormatter: PromConsole.NumberFormatter.humanize,
   yHoverFormatter: PromConsole.NumberFormatter.humanize,
   yUnits: "s/s",
@@ -102,6 +161,7 @@ new PromConsole.Graph({
   node: document.querySelector("#synapse_storage_schedule_time"),
   expr: "rate(synapse_storage_schedule_time:total[2m]) / 1000",
   name: "Total latency",
+  min: 0,
   yAxisFormatter: PromConsole.NumberFormatter.humanize,
   yHoverFormatter: PromConsole.NumberFormatter.humanize,
   yUnits: "s/s",
@@ -116,6 +176,8 @@ new PromConsole.Graph({
   node: document.querySelector("#synapse_cache_ratio"),
   expr: "synapse_cache:hit_ratio_5m * 100",
   name: "[[name]]",
+  min: 0,
+  max: 100,
   yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
   yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
   yUnits: "%",
@@ -233,6 +295,7 @@ new PromConsole.Graph({
   node: document.querySelector("#synapse_notifier_listeners"),
   expr: "synapse_notifier_listeners",
   name: "listeners",
+  min: 0,
   yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
   yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
   yUnits: "",
