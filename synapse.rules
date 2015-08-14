@@ -6,7 +6,8 @@ synapse_http_server_requests:servlet{method=""} = sum(synapse_http_server_reques
 
 synapse_http_server_requests:total{servlet=""} = sum(synapse_http_server_requests:by_method) by (servlet)
 
-synapse_storage_cache:hit_ratio_5m = rate(synapse_storage_cache:hits[5m]) / rate(synapse_storage_cache:total[5m])
+synapse_cache:hit_ratio_5m = rate(synapse_util_caches_cache:hits[5m]) / rate(synapse_util_caches_cache:total[5m])
+synapse_cache:hit_ratio_30s = rate(synapse_util_caches_cache:hits[30s]) / rate(synapse_util_caches_cache:total[30s])
 
 process_fds:total = sum(process_fds) by (job)
 

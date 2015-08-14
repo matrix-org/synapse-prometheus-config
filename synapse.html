@@ -110,11 +110,11 @@ new PromConsole.Graph({
 </script>
 
 <h3>Cache hit ratio</h3>
-<div id="synapse_storage_cache_ratio"></div>
+<div id="synapse_cache_ratio"></div>
 <script>
 new PromConsole.Graph({
-  node: document.querySelector("#synapse_storage_cache_ratio"),
-  expr: "synapse_storage_cache:hit_ratio_5m * 100",
+  node: document.querySelector("#synapse_cache_ratio"),
+  expr: "synapse_cache:hit_ratio_5m * 100",
   name: "[[name]]",
   yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
   yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
@@ -124,11 +124,11 @@ new PromConsole.Graph({
 </script>
 
 <h3>Cache size</h3>
-<div id="synapse_storage_cache_size"></div>
+<div id="synapse_cache_size"></div>
 <script>
 new PromConsole.Graph({
-  node: document.querySelector("#synapse_storage_cache_size"),
-  expr: "synapse_storage_cache:size",
+  node: document.querySelector("#synapse_cache_size"),
+  expr: "synapse_util_caches_cache:size",
   name: "[[name]]",
   yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
   yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
