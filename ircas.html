@@ -19,29 +19,13 @@ new PromConsole.Graph({
 })
 </script>
 
-<h3>IRC Client Connections (OpenMarket)</h3>
+<h3>IRC Client Connections</h3>
 <div id="irc_cli_conn"></div>
 <script>
 new PromConsole.Graph({
   node: document.querySelector("#irc_cli_conn"),
   expr: "ircas_conn_clients_gauge",
   name: "[[ircinst]]",
-  renderer: "line",
-  height: 150,
-  yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
-  yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
-  yUnits: "connection",
-  yTitle: "TCP Connections"
-})
-</script>
-
-<h3>IRC Client Connections (Matrix.org)</h3>
-<div id="irc_cli_conn_mx"></div>
-<script>
-new PromConsole.Graph({
-  node: document.querySelector("#irc_cli_conn_mx"),
-  expr: "ircas_matrixorg_irc_clients_connected_irc_freenode_net_gauge",
-  name: "[[domain]]",
   renderer: "line",
   height: 150,
   yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
