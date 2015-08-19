@@ -242,6 +242,20 @@ new PromConsole.Graph({
 })
 </script>
 
+<h3>Average event send times</h3>
+<div id="synapse_http_server_send_time_avg"></div>
+<script>
+new PromConsole.Graph({
+  node: document.querySelector("#synapse_http_server_send_time_avg"),
+  expr: "rate(synapse_http_server_response_time:total{servlet='RoomSendEventRestServlet'}[2m]) / rate(synapse_http_server_response_time:count{servlet='RoomSendEventRestServlet'}[2m]) / 1000",
+  name: "[[servlet]]",
+  yAxisFormatter: PromConsole.NumberFormatter.humanize,
+  yHoverFormatter: PromConsole.NumberFormatter.humanize,
+  yUnits: "s/req",
+  yTitle: "Response time"
+})
+</script>
+
 <h1>Federation</h1>
 
 <h3>Sent Messages</h3>
