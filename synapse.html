@@ -242,6 +242,39 @@ new PromConsole.Graph({
 })
 </script>
 
+
+<h3>CPU Usage</h3>
+<div id="synapse_http_server_response_ru_utime"></div>
+<script>
+new PromConsole.Graph({
+  node: document.querySelector("#synapse_http_server_response_ru_utime"),
+  expr: "rate(synapse_http_server_response_ru_utime:total[2m])",
+  name: "[[servlet]]",
+  renderer: "stacked",
+  yAxisFormatter: PromConsole.NumberFormatter.humanize,
+  yHoverFormatter: PromConsole.NumberFormatter.humanize,
+  yUnits: "s/s",
+  yTitle: "CPU Usage"
+})
+</script>
+
+
+<h3>DB Usage</h3>
+<div id="synapse_http_server_response_db_txn_duration"></div>
+<script>
+new PromConsole.Graph({
+  node: document.querySelector("#synapse_http_server_response_db_txn_duration"),
+  expr: "rate(synapse_http_server_response_db_txn_duration:total[2m])",
+  name: "[[servlet]]",
+  renderer: "stacked",
+  yAxisFormatter: PromConsole.NumberFormatter.humanize,
+  yHoverFormatter: PromConsole.NumberFormatter.humanize,
+  yUnits: "s/s",
+  yTitle: "DB Usage"
+})
+</script>
+
+
 <h3>Average event send times</h3>
 <div id="synapse_http_server_send_time_avg"></div>
 <script>
