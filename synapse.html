@@ -242,6 +242,34 @@ new PromConsole.Graph({
 })
 </script>
 
+<h3>All responses by code</h3>
+<div id="synapse_http_server_responses"></div>
+<script>
+new PromConsole.Graph({
+  node: document.querySelector("#synapse_http_server_responses"),
+  expr: "rate(synapse_http_server_responses[2m])",
+  name: "[[method]] / [[code]]",
+  yAxisFormatter: PromConsole.NumberFormatter.humanize,
+  yHoverFormatter: PromConsole.NumberFormatter.humanize,
+  yUnits: "req/s",
+  yTitle: "Requests"
+})
+</script>
+
+<h3>Error responses by code</h3>
+<div id="synapse_http_server_responses_err"></div>
+<script>
+new PromConsole.Graph({
+  node: document.querySelector("#synapse_http_server_responses_err"),
+  expr: "rate(synapse_http_server_responses{code=~\"[45]..\"}[2m])",
+  name: "[[method]] / [[code]]",
+  yAxisFormatter: PromConsole.NumberFormatter.humanize,
+  yHoverFormatter: PromConsole.NumberFormatter.humanize,
+  yUnits: "req/s",
+  yTitle: "Requests"
+})
+</script>
+
 
 <h3>CPU Usage</h3>
 <div id="synapse_http_server_response_ru_utime"></div>
