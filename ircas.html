@@ -8,7 +8,7 @@
 <script>
 new PromConsole.Graph({
   node: document.querySelector("#memory_gauge"),
-  expr: "ircas_memory_gauge{ircinst!=\"undefined\"}",
+  expr: "ircas_memory_gauge{ircinst!=\"undefined\",type!=\"heapTotal\"}",
   name: "[[ircinst]]-[[type]]",
   renderer: "line",
   height: 150,
@@ -56,8 +56,8 @@ new PromConsole.Graph({
 <script>
 new PromConsole.Graph({
   node: document.querySelector("#ircas_mxtoirc_requests_timer_count"),
-  expr: "sum(rate(ircas_requests_timer_count{direction=\"toirc\"}[2m])) by (outcome)",
-  name: "[[outcome]]",
+  expr: "sum(rate(ircas_requests_timer_count{direction=\"toirc\"}[2m])) by (ircinst, outcome)",
+  name: "[[ircinst]]-[[outcome]]",
   yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
   yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
   yUnits: "requests/s",
@@ -70,8 +70,22 @@ new PromConsole.Graph({
 <script>
 new PromConsole.Graph({
   node: document.querySelector("#ircas_irctomx_requests_timer_count"),
-  expr: "sum(rate(ircas_requests_timer_count{direction=\"fromirc\"}[2m])) by (outcome)",
-  name: "[[outcome]]",
+  expr: "sum(rate(ircas_requests_timer_count{direction=\"fromirc\"}[2m])) by (ircinst, outcome)",
+  name: "[[ircinst]]-[[outcome]]",
+  yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yUnits: "requests/s",
+  yTitle: "Requests"
+})
+</script>
+
+<h3>Failure Rates</h3>
+<div id="ircas_global_requests_fail_count"></div>
+<script>
+new PromConsole.Graph({
+  node: document.querySelector("#ircas_global_requests_fail_count"),
+  expr: "sum(rate(ircas_requests_timer_count{outcome=\"fail\"}[2m])) by (ircinst, direction)",
+  name: "[[ircinst]]-[[direction]]",
   yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
   yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
   yUnits: "requests/s",
@@ -98,8 +112,8 @@ new PromConsole.Graph({
 <script>
 new PromConsole.Graph({
   node: document.querySelector("#ircas_mxtoirc_requests_timer"),
-  expr: "sum(rate(ircas_requests_timer_sum{direction=\"toirc\"}[5m])) by (outcome) / sum(rate(ircas_requests_timer_count{direction=\"toirc\"}[5m])) by (outcome)",
-  name: "[[outcome]]",
+  expr: "sum(rate(ircas_requests_timer_sum{direction=\"toirc\",outcome!=\"delay\"}[5m])) by (outcome, ircinst) / sum(rate(ircas_requests_timer_count{direction=\"toirc\",outcome!=\"delay\"}[5m])) by (outcome, ircinst)",
+  name: "[[ircinst]]-[[outcome]]",
   yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
   yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
   yUnits: "ms",
@@ -112,8 +126,8 @@ new PromConsole.Graph({
 <script>
 new PromConsole.Graph({
   node: document.querySelector("#ircas_irctomx_requests_timer"),
-  expr: "sum(rate(ircas_requests_timer_sum{direction=\"fromirc\"}[5m])) by (outcome) / sum(rate(ircas_requests_timer_count{direction=\"fromirc\"}[5m])) by (outcome)",
-  name: "[[outcome]]",
+  expr: "sum(rate(ircas_requests_timer_sum{direction=\"fromirc\",outcome!=\"delay\"}[5m])) by (outcome, ircinst) / sum(rate(ircas_requests_timer_count{direction=\"fromirc\",outcome!=\"delay\"}[5m])) by (outcome, ircinst)",
+  name: "[[ircinst]]-[[outcome]]",
   yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
   yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
   yUnits: "ms",
