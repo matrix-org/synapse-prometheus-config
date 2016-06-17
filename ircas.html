@@ -37,6 +37,34 @@ new PromConsole.Graph({
 
 <h1>Requests</h1>
 
+<h3>Join Rate</h3>
+<div id="ircas_join_rate"></div>
+<script>
+new PromConsole.Graph({
+  node: document.querySelector("#ircas_join_rate"),
+  expr: "rate(ircas_membership_counter{state=\"join\"}[2m])",
+  name: "[[ircinst]]-[[protocol]]",
+  yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yUnits: "joins/s",
+  yTitle: "Joins per second"
+})
+</script>
+
+<h3>Part Rate</h3>
+<div id="ircas_part_rate"></div>
+<script>
+new PromConsole.Graph({
+  node: document.querySelector("#ircas_part_rate"),
+  expr: "rate(ircas_membership_counter{state=\"part\"}[2m])",
+  name: "[[ircinst]]-[[protocol]]",
+  yAxisFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yHoverFormatter: PromConsole.NumberFormatter.humanizeNoSmallPrefix,
+  yUnits: "parts/s",
+  yTitle: "Parts per second"
+})
+</script>
+
 <h3>Global Message Rate</h3>
 <div id="ircas_requests_timer_count"></div>
 <script>
