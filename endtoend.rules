@@ -1,0 +1,5 @@
+endtoend_send_rtt_1m{collate="avg"} = rate(send_rtt_total[1m]) / rate(send_rtt_count[1m])
+endtoend_recv_rtt_1m{collate="avg"} = rate(recv_rtt_total[1m]) / rate(recv_rtt_count[1m])
+
+endtoend_send_rtt_1m{collate="max"} = send_rtt_1m_max
+endtoend_recv_rtt_1m{collate="max"} = recv_rtt_1m_max

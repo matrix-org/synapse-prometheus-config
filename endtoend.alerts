@@ -1,0 +1,8 @@
+ALERT MatrixHighRTT
+  IF endtoend_recv_rtt_1m{collate="avg"} > 1
+  FOR 5m
+  LABELS { severity = "page" }
+  ANNOTATIONS {
+    summary = "High end-to-end roundtrip receive time",
+    description = "End-to-end roundtrip receive time has been above 1 second from {{ $labels.client }} for 5 minutes"
+  }
