@@ -17,6 +17,7 @@ nohup ../prometheus/prometheus -config.file=prometheus.yaml \
     -storage.local.path=metrics \
     -storage.local.retention=${STORAGE_HOURS}h \
     -web.external-url=http://matrix.org/prometheus/ \
+    -alertmanager.url=http://localhost:9093/ \
     &
 PID=$!
 
