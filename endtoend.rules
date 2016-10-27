@@ -1,12 +1,4 @@
 # vim:ft=prometheus_rules
-endtoend_send_rtt_1m{collate="avg"} = rate(send_rtt_total[1m]) / rate(send_rtt_count[1m])
-endtoend_recv_rtt_1m{collate="avg"} = rate(recv_rtt_total[1m]) / rate(recv_rtt_count[1m])
-
-endtoend_send_rtt_1m{collate="max"} = send_rtt_1m_max
-endtoend_recv_rtt_1m{collate="max"} = recv_rtt_1m_max
-
-endtoend_send_failures_1m:rate = rate(send_failures[1m]) / on (job, client) rate(attempts[1m])
-endtoend_recv_failures_1m:rate = rate(recv_failures[1m]) / on (job, client) rate(attempts[1m])
 
 recv_rtt_over{le=""} = label_replace(attempts - on(job) group_right recv_rtt_within, "gt", "$1", "le", "(.*)")
 send_rtt_over{le=""} = label_replace(attempts - on(job) group_right send_rtt_within, "gt", "$1", "le", "(.*)")
