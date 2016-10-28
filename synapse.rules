@@ -9,8 +9,6 @@ synapse_http_server_requests:total{servlet=""} = sum(synapse_http_server_request
 synapse_cache:hit_ratio_5m = rate(synapse_util_caches_cache:hits[5m]) / rate(synapse_util_caches_cache:total[5m])
 synapse_cache:hit_ratio_30s = rate(synapse_util_caches_cache:hits[30s]) / rate(synapse_util_caches_cache:total[30s])
 
-process_fds:total = sum(process_fds) by (job)
-
 synapse_federation_client_sent{type="EDU"} = synapse_federation_client_sent_edus + 0
 synapse_federation_client_sent{type="PDU"} = synapse_federation_client_sent_pdu_destinations:count + 0
 synapse_federation_client_sent{type="Query"} = sum(synapse_federation_client_sent_queries) by (job)
