@@ -1,4 +1,0 @@
-# vim:ft=prometheus_rules
-
-recv_rtt_over{le=""} = label_replace(attempts - on(job) group_right recv_rtt_within, "gt", "$1", "le", "(.*)")
-send_rtt_over{le=""} = label_replace(attempts - on(job) group_right send_rtt_within, "gt", "$1", "le", "(.*)")
