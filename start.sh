@@ -18,7 +18,7 @@ MEMORY_CHUNKS=524288
 
 nohup ../prometheus/prometheus -config.file=prometheus.yaml \
     -storage.local.memory-chunks=${MEMORY_CHUNKS} \
-    -storage.local.path=metrics \
+    -storage.local.path=${HOME}/var/metrics \
     -storage.local.retention=${STORAGE_HOURS}h \
     -web.external-url=http://matrix.org/prometheus/ \
     -alertmanager.url=http://localhost:9093/alertmanager/ \
