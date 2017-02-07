@@ -1,5 +1,5 @@
-synapse_federation_transaction_queue_pendingEdus:total = sum(synapse_federation_transaction_queue_pendingEdus or absent(synapse_federation_transaction_queue_pendingEdus)*0)
-synapse_federation_transaction_queue_pendingPdus:total = sum(synapse_federation_transaction_queue_pendingPdus or absent(synapse_federation_transaction_queue_pendingPdus)*0)
+synapse_federation_transaction_queue_pending_edus:total = sum(synapse_federation_transaction_queue_pending_edus or absent(synapse_federation_transaction_queue_pending_edus)*0)
+synapse_federation_transaction_queue_pending_pdus:total = sum(synapse_federation_transaction_queue_pending_pdus or absent(synapse_federation_transaction_queue_pending_pdus)*0)
 
 synapse_http_server_requests:method{servlet=""} = sum(synapse_http_server_requests) by (method)
 synapse_http_server_requests:servlet{method=""} = sum(synapse_http_server_requests) by (servlet)
@@ -15,7 +15,6 @@ synapse_federation_client_sent{type="Query"} = sum(synapse_federation_client_sen
 
 synapse_federation_server_received{type="EDU"} = synapse_federation_server_received_edus + 0
 synapse_federation_server_received{type="PDU"} = synapse_federation_server_received_pdus + 0
-synapse_federation_server_received{type="Query"} = sum(synapse_federation_server_received_queries) by (job)
 
 synapse_federation_transaction_queue_pending{type="EDU"} = synapse_federation_transaction_queue_pending_edus + 0
 synapse_federation_transaction_queue_pending{type="PDU"} = synapse_federation_transaction_queue_pending_pdus + 0

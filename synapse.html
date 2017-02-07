@@ -7,9 +7,9 @@
 <div id="process_resource_utime"></div>
 <script>
 new PromConsole.Graph({
-  node: document.querySelector("#process_resource_utime"),
-  expr: "rate(process_resource_utime[2m]) / 1000",
-  name: "utime",
+  node: document.querySelector("#process_cpu_user_seconds_total"),
+  expr: "rate(process_cpu_user_seconds_total[2m]) / 1000",
+  name: "useconds",
   max: 1,
   min: 0,
   renderer: "area",
