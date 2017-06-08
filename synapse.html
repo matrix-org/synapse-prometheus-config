@@ -8,16 +8,16 @@
 <script>
 new PromConsole.Graph({
   node: document.querySelector("#process_resource_utime"),
-  expr: "rate(process_resource_utime[2m]) / 1000",
-  name: "utime",
-  max: 1,
+  expr: "rate(process_cpu_seconds_total[2m]) * 100",
+  name: "[[job]]",  
   min: 0,
-  renderer: "area",
+  max: 100,
+  renderer: "line",
   height: 150,
   yAxisFormatter: PromConsole.NumberFormatter.humanize,
   yHoverFormatter: PromConsole.NumberFormatter.humanize,
-  yUnits: "s/s",
-  yTitle: "Usage"
+  yUnits: "%",
+  yTitle: "CPU Usage"
 })
 </script>
 
@@ -26,8 +26,8 @@ new PromConsole.Graph({
 <script>
 new PromConsole.Graph({
   node: document.querySelector("#process_resource_maxrss"),
-  expr: "process_resource_maxrss",
-  name: "maxrss",
+  expr: "process_psutil_rss:max",
+  name: "Maxrss",
   min: 0,
   renderer: "line",
   height: 150,
@@ -43,7 +43,7 @@ new PromConsole.Graph({
 <script>
 new PromConsole.Graph({
   node: document.querySelector("#process_fds"),
-  expr: "process_fds:total",
+  expr: "process_open_fds{job='synapse'}",
   name: "FDs",
   min: 0,
   renderer: "line",
@@ -62,7 +62,7 @@ new PromConsole.Graph({
 <script>
 new PromConsole.Graph({
   node: document.querySelector("#reactor_total_time"),
-  expr: "rate(reactor_tick_time:total[2m]) / 1000",
+  expr: "rate(python_twisted_reactor_tick_time:total[2m]) / 1000",
   name: "time",
   max: 1,
   min: 0,
@@ -80,7 +80,7 @@ new PromConsole.Graph({
 <script>
 new PromConsole.Graph({
   node: document.querySelector("#reactor_average_time"),
-  expr: "rate(reactor_tick_time:total[2m]) / rate(reactor_tick_time:count[2m]) / 1000",
+  expr: "rate(python_twisted_reactor_tick_time:total[2m]) / rate(python_twisted_reactor_tick_time:count[2m]) / 1000",
   name: "time",
   min: 0,
   renderer: "line",
@@ -97,7 +97,7 @@ new PromConsole.Graph({
 <script>
 new PromConsole.Graph({
   node: document.querySelector("#reactor_pending_calls"),
-  expr: "rate(reactor_pending_calls:total[30s])/rate(reactor_pending_calls:count[30s])",
+  expr: "rate(python_twisted_reactor_pending_calls:total[30s])/rate(python_twisted_reactor_pending_calls:count[30s])",
   name: "calls",
   min: 0,
   renderer: "line",
@@ -174,7 +174,7 @@ new PromConsole.Graph({
 <script>
 new PromConsole.Graph({
   node: document.querySelector("#synapse_cache_ratio"),
-  expr: "synapse_cache:hit_ratio_5m * 100",
+  expr: "rate(synapse_util_caches_cache:total[2m]) * 100",
   name: "[[name]]",
   min: 0,
   max: 100,
